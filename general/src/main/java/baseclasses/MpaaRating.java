@@ -1,7 +1,7 @@
 package baseclasses;
 
 
-
+import sub.InputArgumentTester;
 
 public enum MpaaRating {
 
@@ -17,10 +17,10 @@ public enum MpaaRating {
         this.title = title;
     }
 
-//    public static MpaaRating chooseRating() {
-//        InputArgumentTester iat = new InputArgumentTester();
-//        return iat.assignMpaaRating();
-//    }
+    public static MpaaRating chooseRating() {
+        InputArgumentTester iat = new InputArgumentTester();
+        return iat.assignMpaaRating();
+    }
 
     @Override
     public String toString() {

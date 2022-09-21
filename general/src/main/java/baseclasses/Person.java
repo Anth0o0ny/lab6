@@ -1,6 +1,8 @@
 package baseclasses;
 
 
+import sub.InputArgumentTester;
+
 import javax.xml.bind.annotation.XmlElement;
 
 public class Person {
@@ -61,14 +63,14 @@ public class Person {
         this.nationality = nationality;
     }
 
-//    public static Person ctreatePerson() {
-//
-//        InputArgumentTester iat = new InputArgumentTester();
-//
-//        Color color = Color.chooseColor();
-//
-//        Country country = Country.chooseCountry();
-//
-//        return new Person(iat.assignInputPersonName(), iat.assignInputHeight(), color, country);
-//    }
+    public static Person ctreatePerson() {
+
+        InputArgumentTester iat = new InputArgumentTester();
+
+        Color color = Color.chooseColor();
+
+        Country country = Country.chooseCountry();
+
+        return new Person(iat.assignInputPersonName(), iat.assignInputHeight(), color, country);
+    }
 }

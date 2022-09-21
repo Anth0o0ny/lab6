@@ -5,7 +5,7 @@ import baseclasses.MoviesCollection;
 import other.ClientCommand;
 import other.ClientInvoker;
 import other.Receiver;
-import other.StringConstants;
+import sub.StringConstants;
 import sub.CommandsEnum;
 
 import javax.xml.bind.JAXBException;
