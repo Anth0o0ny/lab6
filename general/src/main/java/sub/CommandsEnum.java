@@ -1,7 +1,7 @@
 package sub;
 
 public enum CommandsEnum {
-//    HELP("help"),
+    HELP("help"),
 //    SHOW("show"),
 //    ADD("add"),
 //    UPDATE("update"),

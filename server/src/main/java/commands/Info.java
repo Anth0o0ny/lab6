@@ -3,6 +3,8 @@ package commands;
 import interaction.Request;
 import interaction.Response;
 import server.ServerReceiver;
+import sub.CommandsEnum;
+import sub.StringConstants;
 
 import java.util.Optional;
 
@@ -18,6 +20,6 @@ public class Info extends ServerCommand {
 
     @Override
     public String getHelp() {
-        return null;
+        return CommandsEnum.INFO.commandName + " : " + StringConstants.Commands.INFO_HELP;
     }
 }

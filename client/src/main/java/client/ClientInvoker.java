@@ -41,8 +41,8 @@ public class ClientInvoker {
 
     private Optional<ClientCommand> create(ClientReceiver clientReceiver, CommandsEnum commandsEnum) {
         switch (commandsEnum){
-//            case HELP:
-//                return (new Help(receiver));
+            case HELP:
+                return Optional.of(new Help(clientReceiver));
             case INFO:
                 return Optional.of(new Info(clientReceiver));
 //            case SHOW:

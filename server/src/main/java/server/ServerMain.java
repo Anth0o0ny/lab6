@@ -23,9 +23,7 @@ public class ServerMain {
 
     public static void main(String[] args) throws IOException, JAXBException {
 
-        MoviesCollection mc = new MoviesCollection();
-        String pathToFile = System.getenv("pathToFile");
-        Parser.parsingToObj(mc.getCollection(), pathToFile);
+
         Server server = new Server();
 
         while (true) {

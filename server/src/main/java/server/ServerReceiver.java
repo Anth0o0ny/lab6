@@ -2,17 +2,27 @@ package server;
 
 import baseclasses.Movie;
 import baseclasses.MoviesCollection;
+import commands.ServerCommand;
 import interaction.Response;
+import parse.Parser;
 import sub.StringConstants;
 
 import java.io.FileNotFoundException;
 import java.util.*;
 
 public class ServerReceiver {
-    private Stack<Movie> collection = new Stack<>();
+
+
+    private final Stack<Movie> collection;
     private final Date creationDate;
+    private final MoviesCollection mc;
+    private final String pathToFile;
 
     public ServerReceiver() {
+        mc = new MoviesCollection();
+        pathToFile = System.getenv("pathToFile");
+        Parser.parsingToObj(mc.getCollection(), pathToFile);
+        collection = mc.getCollection();
         creationDate = new Date();
     }
 
@@ -53,9 +63,13 @@ public class ServerReceiver {
     public Response info(){
         String[] information = new String[3];
         information[0] = StringConstants.PatternCommands.RECEIVER_INFO_TYPE_COLLECTION  + collection.getClass();
-        information[1] = StringConstants.PatternCommands.RECEIVER_INFO_AMOUNT + creationDate;
-        information[2] = StringConstants.PatternCommands.RECEIVER_INFO_INITIALIZATION_DATE + collection.size();
+        information[1] = StringConstants.PatternCommands.RECEIVER_INFO_AMOUNT + collection.size();
+        information[2] = StringConstants.PatternCommands.RECEIVER_INFO_INITIALIZATION_DATE + creationDate;
         return new Response(information);
+    }
+
+    public Response help(Map<String, ServerCommand> commandMap) {
+        return new Response(commandMap.values().stream().map(ServerCommand::getHelp).toArray(String[]::new));
     }
 //    public String shuffle(Stack<Movie> collection) {
 //        if (collection.isEmpty()) {

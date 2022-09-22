@@ -1,5 +1,6 @@
 package server;
 
+import commands.Help;
 import commands.Info;
 import commands.ServerCommand;
 import interaction.Request;
@@ -46,8 +47,8 @@ public class ServerInvoker {
 
     private Optional<ServerCommand> create(ServerReceiver serverReceiver, CommandsEnum commandsEnum) {
         switch (commandsEnum){
-//            case HELP:
-//                return (new Help(receiver));
+            case HELP:
+                return Optional.of(new Help(serverReceiver, getCommandMap()));
             case INFO:
                 return Optional.of(new Info(serverReceiver));
 //            case SHOW:
