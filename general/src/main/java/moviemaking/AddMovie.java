@@ -5,7 +5,7 @@ import baseclasses.Movie;
 import baseclasses.MpaaRating;
 import baseclasses.Person;
 import sub.StringConstants;
-import other.InputArgumentTester;
+import input.InputArgumentTester;
 
 import java.util.Collections;
 import java.util.Date;
@@ -14,6 +14,10 @@ import java.util.Stack;
 public class AddMovie {
 
     private static IdGenerator idGenerator;
+
+    public AddMovie(InputArgumentTester inputArgumentTester) {
+    }
+
     public static void setIdGenerator(IdGenerator idGenerator){
         AddMovie.idGenerator = idGenerator;
     }

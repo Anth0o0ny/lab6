@@ -4,7 +4,7 @@ import baseclasses.Color;
 import baseclasses.Country;
 import baseclasses.MpaaRating;
 import baseclasses.Person;
-import other.InputArgumentTester;
+import input.InputArgumentTester;
 
 public class CreatePerson {
     public static Person ctreatePerson() {

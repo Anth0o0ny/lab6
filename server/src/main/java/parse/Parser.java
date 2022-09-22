@@ -1,4 +1,4 @@
-package other;
+package parse;
 
 import baseclasses.Movie;
 import baseclasses.MoviesCollection;

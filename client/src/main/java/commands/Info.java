@@ -1,32 +1,29 @@
 package commands;
 
 
-import baseclasses.Movie;
-import baseclasses.MoviesCollection;
-import other.ClientCommand;
-import other.ClientInvoker;
-import other.Receiver;
+import interaction.Request;
+import client.ClientReceiver;
 import sub.StringConstants;
 import sub.CommandsEnum;
 
 import javax.xml.bind.JAXBException;
-import java.util.Stack;
+import java.util.Optional;
 
-public class Info implements ClientCommand {
+public class Info extends ClientCommand {
 
-    private final Receiver receiver;
 
-    public Info(Receiver receiver) {
-        this.receiver = receiver;
+    public Info(ClientReceiver clientReceiver) {
+        super(clientReceiver);
     }
 
 
     @Override
-    public String execute(ClientInvoker invoker, Stack<Movie> collection, String argument, MoviesCollection moviesCollection) throws JAXBException {
-        if (argument.isEmpty()) {
-            return receiver.info(collection);
+    public Optional<Request> execute(String argument) {
+        if (argument != null) {
+//            return StringConstants.Commands.CMD_WITHOUT_ARG;
+            return Optional.empty();
         } else {
-            return StringConstants.Commands.CMD_WITHOUT_ARG;
+            return Optional.of(new Request("info"));
         }
     }
 
