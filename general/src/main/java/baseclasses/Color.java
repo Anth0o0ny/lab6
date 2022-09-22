@@ -1,7 +1,7 @@
 package baseclasses;
 
 
-import sub.InputArgumentTester;
+
 
 public enum Color {
 
@@ -17,10 +17,6 @@ public enum Color {
         this.title = title;
     }
 
-    public static Color chooseColor() {
-        InputArgumentTester iat = new InputArgumentTester();
-        return iat.assignInputColor();
-    }
 
     @Override
     public String toString() {

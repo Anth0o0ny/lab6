@@ -1,7 +1,6 @@
 package baseclasses;
 
 
-import sub.InputArgumentTester;
 
 public enum Country {
 
@@ -17,10 +16,6 @@ public enum Country {
         this.title = title;
     }
 
-    public static Country chooseCountry() {
-        InputArgumentTester iat = new InputArgumentTester();
-        return iat.assignInputCountry();
-    }
 
     @Override
     public String toString() {

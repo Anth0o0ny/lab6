@@ -5,7 +5,7 @@ import baseclasses.Movie;
 import baseclasses.MpaaRating;
 import baseclasses.Person;
 import sub.StringConstants;
-import sub.InputArgumentTester;
+import other.InputArgumentTester;
 
 import java.util.Collections;
 import java.util.Date;
@@ -38,6 +38,7 @@ public class AddMovie {
 
         InputArgumentTester iat = new InputArgumentTester();
 
+
         long id = idGenerator.generateId();
         String name = iat.assignInputName() ;
         Double x = iat.assignInputX();
@@ -47,8 +48,8 @@ public class AddMovie {
         Long oscCount = iat.assignInputOscarCount();
         long budget = iat.assignInputBudget();
         String tagline = iat.assignTagline();
-        MpaaRating rate = MpaaRating.chooseRating();
-        Person person = Person.ctreatePerson();
+        MpaaRating rate = CreatePerson.chooseRating();
+        Person person = CreatePerson.ctreatePerson();
 
         return new Movie(id, name, coordinates, date, oscCount, budget, tagline, rate, person);
     }
