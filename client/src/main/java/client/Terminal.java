@@ -8,6 +8,7 @@ import sub.StringConstants;
 import javax.xml.bind.JAXBException;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -46,7 +47,7 @@ public class Terminal {
 //        return StringConstants.StartTreatment.EXECUTE_ENDED;
 //    }
 
-    public void inputKeyboard() throws JAXBException {
+    public void inputKeyboard() throws JAXBException, NoSuchElementException {
         this.scanner = new Scanner(System.in);
 
         System.out.println(StringConstants.StartTreatment.START_HELPER);
@@ -55,6 +56,7 @@ public class Terminal {
             System.out.println(StringConstants.StartTreatment.ENTER_COMMAND);
             String commandLine = scanner.nextLine();
             Optional<Request> optionalRequest = lineParseToCommand(commandLine);
+
             if(optionalRequest.isPresent()){
 
                 Request request = optionalRequest.get();
@@ -70,22 +72,9 @@ public class Terminal {
                     Response response = optionalResponse.get();
                     responseProcessing(response);
                 }
+            } else{
+                System.out.println(StringConstants.StartTreatment.COMMAND_NOT_EXISTS);
             }
-//
-//                if(request.getCommandName().equals())
-//            }
-//            try {
-//                output = lineParseToCommand(commandLine);
-//                if (output == null) {
-//                    break;
-//                }
-//                System.out.println(output);
-//            } catch (NullPointerException ex) {
-//                System.out.println(StringConstants.StartTreatment.COMMAND_NOT_EXISTS);
-//            } catch (JAXBException e) {
-//                System.out.println(StringConstants.StartTreatment.PARSE_FAILED);
-//                ;
-//            }
 
         }
     }
@@ -99,7 +88,7 @@ public class Terminal {
         } else if (cmdline.length == 2) {
             return clientInvoker.check(command, cmdline[1]);
         } else {
-                return Optional.empty();
+            return Optional.empty();
         }
     }
 

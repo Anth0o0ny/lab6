@@ -24,7 +24,7 @@ public class ClientInvoker {
         // return StringConstants.PatternCommands.INVOKER_WRONG_COMMAND;
 //        return Optional.empty();
 
-        return null;
+        return Optional.empty();
     }
 
     public HashMap<String, ClientCommand> getCommandMap() {
@@ -45,34 +45,34 @@ public class ClientInvoker {
                 return Optional.of(new Help(clientReceiver));
             case INFO:
                 return Optional.of(new Info(clientReceiver));
-//            case SHOW:
-//                return (new Show(receiver));
+            case SHOW:
+                return Optional.of(new Show(clientReceiver));
 //            case ADD:
 //                return (new Add(receiver));
 //            case UPDATE:
 //                return (new UpdateById(receiver));
-//            case REMOVE_BY_ID:
-//                return (new RemoveById(receiver));
-//            case CLEAR:
-//                return (new Clear(receiver));
+            case REMOVE_BY_ID:
+                return Optional.of(new RemoveById(clientReceiver));
+            case CLEAR:
+                return Optional.of(new Clear(clientReceiver));
 //            case SAVE:
 //                return (new Save(receiver));
 //            case EXECUTE_SCRIPT:
 //                return (new ExecuteScript(receiver));
-//            case EXIT:
-//                return (new Exit(receiver));
+            case EXIT:
+                return Optional.of(new Exit(clientReceiver));
 //            case INSERT_AT:
 //                return (new InsertAt(receiver));
 //            case ADD_IF_MIN:
 //                return (new AddIfMin(receiver));
-//            case SHUFFLE:
-//                return (new Shuffle(receiver));
+            case SHUFFLE:
+                return Optional.of(new Shuffle(clientReceiver));
 //            case REMOVE_ALL_BY_SCREENWRITER:
 //                return (new RemoveAllByScreenwriter(receiver));
-//            case GROUP_COUNTING_BY_TAGLINE:
-//                return (new GroupCountingByTagline(receiver));
-//            case PRINT_DESCENDING:
-//                return (new PrintDescending(receiver));
+            case GROUP_COUNTING_BY_TAGLINE:
+                return Optional.of(new GroupCountingByTagline(clientReceiver));
+            case PRINT_DESCENDING:
+                return Optional.of(new PrintDescending(clientReceiver));
         }
         return null;
     }

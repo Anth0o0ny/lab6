@@ -4,12 +4,14 @@ import baseclasses.MoviesCollection;
 import interaction.Request;
 import interaction.Response;
 import parse.Parser;
+import sub.StringConstants;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.nio.channels.SelectionKey;
 import java.util.Iterator;
 import java.util.Optional;
+import java.util.Scanner;
 import java.util.Set;
 
 public class ServerMain {
@@ -31,25 +33,40 @@ public class ServerMain {
             Set<SelectionKey> keys = server.getSelector().selectedKeys();
             Iterator iterator = keys.iterator();
             while (iterator.hasNext()) {
+
+                if (parseComment() == 0){
+                    return;
+                }
+
+
                 SelectionKey key = (SelectionKey) iterator.next();
                 iterator.remove();
                 if (key.isAcceptable()) {
                     server.register();
-                    System.out.println(key);
                 } else if (key.isReadable()) {
                     Request request = server.readRequest(key);
                     if (request != null) {
                         Optional<Response> optionalResponse = serverInvoker.execute(request);
-                        System.out.println("Готов ли ответ: ");
-                        System.out.println(optionalResponse.isPresent());
+
                         if (optionalResponse.isPresent()) {
                             Response response = optionalResponse.get();
                             server.sendResponse(response, key);
-                            System.out.println(" теоретически выполнилась");
+
                         }
                     }
                 }
             }
+        }
+    }
+    private static int parseComment() {
+        try {
+            String comment = "";
+            if (System.in.available() > 0) {
+                comment = (new Scanner(System.in)).nextLine();
+            }
+            return comment.compareTo("exit");
+        } catch (IOException | NullPointerException e) {
+            return 0;
         }
     }
 }

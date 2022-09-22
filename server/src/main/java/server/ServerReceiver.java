@@ -71,6 +71,28 @@ public class ServerReceiver {
     public Response help(Map<String, ServerCommand> commandMap) {
         return new Response(commandMap.values().stream().map(ServerCommand::getHelp).toArray(String[]::new));
     }
+
+    public Response show(){
+        return new Response(collection.stream().map(Movie::toString).toArray(String[]::new));
+    }
+
+    public Response clear(){
+        collection.clear();
+        return new Response(StringConstants.PatternCommands.RECEIVER_CLEAR_RESULT);
+    }
+
+    public Response shuffle(){
+        if (collection.isEmpty()) {
+            return new Response(StringConstants.PatternCommands.RECEIVER_EMPTY_COLLECTION_RESULT)   ;
+        } else {
+            Collections.shuffle(collection);
+            StringBuilder stringBuilder = new StringBuilder();
+            for (Movie movie : collection) {
+                stringBuilder.append(movie).append("; ");
+            }
+            return new Response(stringBuilder.toString());
+        }
+    }
 //    public String shuffle(Stack<Movie> collection) {
 //        if (collection.isEmpty()) {
 //            return StringConstants.PatternCommands.RECEIVER_EMPTY_COLLECTION_RESULT;
@@ -84,36 +106,38 @@ public class ServerReceiver {
 //        }
 //    }
 //
-//    public String printDescending(Stack<Movie> collection) {
-//        if (collection.isEmpty()) {
-//            return StringConstants.PatternCommands.RECEIVER_EMPTY_COLLECTION_RESULT;
-//        } else {
-//            Stack<Movie> cl = new Stack<>();
-//            cl.addAll(collection);
-//            Collections.reverse(cl);
-//            StringBuilder stringBuilder = new StringBuilder();
-//            for (Movie movie : cl) {
-//                stringBuilder.append(movie).append("; ");
-//            }
-//            return stringBuilder.toString();
-//        }
-//    }
+    public Response printDescending() {
+        if (collection.isEmpty()) {
+            return new Response(StringConstants.PatternCommands.RECEIVER_EMPTY_COLLECTION_RESULT);
+        } else {
+            Stack<Movie> cl = new Stack<>();
+            cl.addAll(collection);
+            Collections.reverse(cl);
+            StringBuilder stringBuilder = new StringBuilder();
+            for (Movie movie : cl) {
+                stringBuilder.append(movie).append("; ");
+            }
+            return new Response(stringBuilder.toString());
+        }
+    }
 //
-//    public String groupCountingByTagline(Stack<Movie> collection) {
-//        if (collection.isEmpty()) {
-//            return StringConstants.PatternCommands.RECEIVER_EMPTY_COLLECTION_RESULT;
-//        } else {
-//            ArrayList<String> list = new ArrayList<>();
-//            for (Movie movie : collection) {
-//                list.add(movie.getTagline());
-//            }
-//
-//            Set<String> st = new HashSet<>(list);
-//            for (String s : st)
-//                System.out.println("\"" + s + "\"" + ": " + Collections.frequency(list, s));
-//        }
-//        return "";
-//    }
+    public Response groupCountingByTagline() {
+        if (collection.isEmpty()) {
+            return new Response(StringConstants.PatternCommands.RECEIVER_EMPTY_COLLECTION_RESULT);
+        } else {
+            ArrayList<String> list = new ArrayList<>();
+            for (Movie movie : collection) {
+                list.add(movie.getTagline());
+            }
+            StringBuilder stringBuilder = new StringBuilder();
+            Set<String> st = new HashSet<>(list);
+            for (String s : st)
+                stringBuilder.append("\"").append(s).append("\": ").append(Collections.frequency(list, s)).append("\n");
+
+            return new Response(stringBuilder.toString());
+        }
+        }
+
 //
 //    public String removeById(Stack<Movie> collection, String argument) {
 //

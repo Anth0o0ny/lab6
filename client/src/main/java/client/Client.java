@@ -6,6 +6,7 @@ import interaction.Response;
 import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.net.SocketException;
 import java.nio.ByteBuffer;
 import java.util.Optional;
 import java.util.Scanner;
@@ -95,6 +96,8 @@ public class Client {
             byte[] sendArray = byteArrayOutputStream.toByteArray();
             socket.getOutputStream().write(sendArray);
 //            socket.send(new DatagramPacket(sendArray, sendArray.length, host, PORT));
+        } catch (SocketException e){
+            System.out.println("Сервер недоступен");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -113,10 +116,11 @@ public class Client {
         catch (IOException e) {
             System.out.println("Ошибка получения данных с сервера");
             return Optional.empty();
-        }
-        catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
             System.out.println("Некорреткные данные с сервера");
             return Optional.empty();
+        } catch (NullPointerException e){
+             return Optional.empty();
         }
     }
 }

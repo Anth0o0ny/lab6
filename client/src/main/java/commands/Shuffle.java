@@ -1,21 +1,15 @@
 package commands;
 
-
-import interaction.Request;
 import client.ClientReceiver;
+import interaction.Request;
 import sub.StringConstants;
-import sub.CommandsEnum;
 
-import javax.xml.bind.JAXBException;
 import java.util.Optional;
 
-public class Info extends ClientCommand {
-
-
-    public Info(ClientReceiver clientReceiver) {
+public class Shuffle extends ClientCommand{
+    public Shuffle(ClientReceiver clientReceiver){
         super(clientReceiver);
     }
-
 
     @Override
     public Optional<Request> execute(String arg) {
@@ -23,6 +17,6 @@ public class Info extends ClientCommand {
             System.out.println(StringConstants.Commands.CMD_WITHOUT_ARG);
             return Optional.empty();
         }
-        return Optional.of(new Request("info"));
-}}
-
+        return Optional.of(new Request("shuffle"));
+    }
+}

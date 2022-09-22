@@ -21,7 +21,9 @@ public class StringConstants {
         public final static String ADD_IF_MIN_HELP = "добавить новый элемент в коллекцию, если его значение меньше, чем у наименьшего элемента этой коллекции.";
         public final static String CLEAR_HELP = "очистить коллекцию.";
         public final static String EXIT_HELP = "завершить программу.";
+        public final static String EXIT_RESULT = "Программа завершила свою работу";
         public final static String GROUP_COUNTING_BY_TAGLINE_HELP = "сгруппировать элементы коллекции по значению поля tagline, вывести количество элементов в каждой группе.";
+        public final static String GROUP_COUNTING_RESULT = "";
         public final static String HELP_HELP = "получить справку по командам.";
         public final static String INFO_HELP = "получить информацию о коллекции.";
         public final static String INSERT_AT_HELP = "добавить новый элемент в заданную позицию.";
@@ -32,6 +34,7 @@ public class StringConstants {
         public final static String SHOW_HELP = "просмотреть все элементы коллекции.";
         public final static String SHUFFLE_HELP = "перемешать элементы коллекции в случайном порядке.";
         public final static String UPDATE_BY_ID_HELP = "обновить значение элемента коллекции, id которого равен заданному.";
+
 
         public final static String EXECUTE_SCRIPT_HELP = "считать и исполнить скрипт из указанного файла.";
         public final static String EXECUTE_ENTER_FILENAME = "Передайте название файла.";
