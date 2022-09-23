@@ -13,8 +13,8 @@ import java.util.Scanner;
 
 public class Client {
 
-    private final int SERVER_PORT = 8080;
-//    private final int SERVER_PORT = Integer.parseInt(System.getenv("SERVER_PORT"));
+//    private final int PORT = 8013;
+    private final int PORT = Integer.parseInt(System.getenv("PORT"));
     private final int BUFFER_SIZE = 1048576;
     private Socket socket;
     private InetAddress address;
@@ -23,6 +23,7 @@ public class Client {
     private static Client client;
 
     public Client() {
+
         this.socket = new Socket();
     }
 
@@ -37,21 +38,22 @@ public class Client {
     public boolean connect() {
         try {
             address = InetAddress.getLoopbackAddress();
-            socket = new Socket(address, SERVER_PORT);
+            socket = new Socket(address, PORT);
             inputStream = socket.getInputStream();
             this.outputStream = socket.getOutputStream();
 
             System.out.println("Успешно подключились к серверу");
             return true;
-        }
-        catch (IOException e) {
-            System.out.println("Сервер недоступен. \n");
+        } catch (IOException e) {
+            System.out.println("Ошибка создания сокета. Сервер не может начать работу");
             return false;
         }
+
     }
 
-    public boolean reconnect(){
+    public boolean reconnect() {
         int number = 1;
+
         while (!connect()) {
             System.out.println("Переподключение к серверу...");
             System.out.println("Попытка № " + number);
@@ -72,34 +74,19 @@ public class Client {
         return socket.isConnected();
     }
 
-    public void close() {
-        try {
-            outputStream.close();
-            inputStream.close();
-            socket.close();
-        }
-        catch (IOException e) {
-            System.out.println("Не удалось корректно завершить работу с сервером");
-        }
-    }
-
     public void sendRequest(Request request){
         try{
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
             objectOutputStream.writeObject(request);
 
-
-
-            ///////////////
-//            outputStream.write(byteArrayOutputStream.toByteArray());
             byte[] sendArray = byteArrayOutputStream.toByteArray();
             socket.getOutputStream().write(sendArray);
-//            socket.send(new DatagramPacket(sendArray, sendArray.length, host, PORT));
         } catch (SocketException e){
             System.out.println("Сервер недоступен");
+            reconnect();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Невозможно создать запрос");;
         }
     }
 

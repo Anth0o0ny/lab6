@@ -11,16 +11,17 @@ public class ClientMain {
         ClientReceiver clientReceiver = new ClientReceiver();
         ClientInvoker clientInvoker = new ClientInvoker(clientReceiver);
         client.setClient(client);
+
         client.connect();
+
+
         Terminal terminal = new Terminal(clientInvoker, client);
         try {
             terminal.inputKeyboard();
         } catch (JAXBException e) {
-            e.printStackTrace();
+            System.out.println("Проблема парсинга");;
         }catch (NoSuchElementException ignore){
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } finally {
             System.out.println("Клиент закончил работу.");
         }

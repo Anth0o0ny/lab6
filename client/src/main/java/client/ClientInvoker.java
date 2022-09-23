@@ -20,9 +20,6 @@ public class ClientInvoker {
     public Optional<Request> check(String commandName, String argument) throws JAXBException {
         if (this.commandsMap.containsKey(commandName))
             return this.commandsMap.get(commandName).execute(argument);
-        //System.out.println(RB.getString("badCommand"));
-        // return StringConstants.PatternCommands.INVOKER_WRONG_COMMAND;
-//        return Optional.empty();
 
         return Optional.empty();
     }

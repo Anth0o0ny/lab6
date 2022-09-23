@@ -9,7 +9,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.*;
 
 public class Server {
-    private static final int SERVER_PORT = 8080;
+//    private final Integer PORT = 8013;
     private static final int BUFFER_SIZE = 1024 * 1024;
     private Selector selector;
     private ServerSocketChannel serverSocketChannel;
@@ -17,13 +17,13 @@ public class Server {
     private ByteBuffer buffer;
 
 
-    Server() {
+    public Server() {
         try{
-//            int SERVER_PORT = Integer.parseInt(System.getenv("PORT"));
+            int PORT = Integer.parseInt(System.getenv("PORT"));
             serverSocketChannel = ServerSocketChannel.open();
             selector = Selector.open();
             serverSocketChannel.configureBlocking(false);
-            serverSocketChannel.socket().bind(new InetSocketAddress(SERVER_PORT));
+            serverSocketChannel.socket().bind(new InetSocketAddress(PORT));
             serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
         } catch (ClosedChannelException e) {
             e.printStackTrace();

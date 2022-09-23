@@ -27,8 +27,6 @@ public class ServerInvoker {
 
     public Optional<Response> execute(Request request) throws JAXBException {
         String commandName = request.getCommandName();
-//
-        System.out.println(this.commandsMap.get(commandName));
         return this.commandsMap.get(commandName).execute(request);
     }
 

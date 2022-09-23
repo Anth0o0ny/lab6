@@ -14,10 +14,7 @@ import java.util.Set;
 public class ServerMain {
 
     private static final ServerReceiver serverReceiver = new ServerReceiver();
-    ////Exception in thread "main" java.lang.ExceptionInInitializerError
-    //Caused by: java.lang.NullPointerException: Cannot invoke "java.util.Optional.ifPresent(java.util.function.Consumer)" because "optional" is null
-    //	at server.ServerInvoker.<init>(ServerInvoker.java:25)
-    //	at server.ServerMain.<clinit>(ServerMain.java:16)
+
     private static final ServerInvoker serverInvoker = new ServerInvoker(serverReceiver);
 
     public static void main(String[] args) throws IOException, JAXBException {
@@ -37,6 +34,14 @@ public class ServerMain {
                 if (servcomment.equals("save")) {
                     System.out.println(serverReceiver.save());
                 }
+                else if (servcomment.equals("exit")) {
+                    System.out.println("Сервер завершает свою работу.");
+                    System.exit(0);
+                } else {
+                    System.out.println("Сервер поддерживает только две команды: save и exit.");
+                }
+
+
             }
 
 
