@@ -1,6 +1,7 @@
 package client;
 
 import baseclasses.MoviesCollection;
+import commands.ExecuteScript;
 import interaction.Request;
 import interaction.Response;
 import sub.StringConstants;
@@ -26,28 +27,36 @@ public class Terminal {
         this.client = client;
     }
 
-//    public String startFile(String argument) throws FileNotFoundException {
-//
-//        String pathToFile = new File(argument).getAbsolutePath();
-//        File file = new File(pathToFile);
-//        this.scanner = new Scanner(file);
-//
-//        while (scanner.hasNextLine()) {
-//            String commandLine = scanner.nextLine();
-//            try {
-//                output = lineParseToCommand(commandLine);
-//                if (output == null) {
-//                    break;
-//                }
-//                System.out.println(output);
-//            } catch (JAXBException e) {
-//                return StringConstants.StartTreatment.EXECUTE_FAILED;
-//            }
-//        }
-//        return StringConstants.StartTreatment.EXECUTE_ENDED;
-//    }
+    public void startFile(String filename) throws JAXBException {
+        setScanner(filename);
+        if (scanner == null) {
+            System.out.println(StringConstants.Commands.EXECUTE_FILE_NOT_EXISTS);
+            return;
+        }
+        while (scanner.hasNext()) {
+            String line = scanner.nextLine();
+            Optional<Request> optRequest = lineParseToCommand(line);
+            if (!optRequest.isPresent()) {
+                System.out.println();
+            } else {
+                Request request = optRequest.get();
+                if (request.getCommandName().equals("execute_script")) {
+                    startFile(request.getArgument());
+                    continue;
+                }
+                client.sendRequest(request);
+                Optional<Response> optionalResponse = client.getResponse();
+                if (!optionalResponse.isPresent()) {
+                    System.out.println("Execute is broken");
+                } else{
+                    Response response = optionalResponse.get();
+                    responseProcessing(response);
+                }
+            }
+        }
+    }
 
-    public void inputKeyboard() throws JAXBException, NoSuchElementException {
+    public void inputKeyboard() throws JAXBException, NoSuchElementException, FileNotFoundException {
         this.scanner = new Scanner(System.in);
 
         System.out.println(StringConstants.StartTreatment.START_HELPER);
@@ -62,7 +71,9 @@ public class Terminal {
                 Request request = optionalRequest.get();
 
                 if (request.getCommandName().equals("execute_script")){
-                    System.out.println("execute");
+                    startFile(request.getArgument());
+                    ExecuteScript.clearPaths();
+                    scanner = new Scanner(System.in);
                     continue;
                 }
                 client.sendRequest(request);
@@ -89,6 +100,15 @@ public class Terminal {
             return clientInvoker.check(command, cmdline[1]);
         } else {
             return Optional.empty();
+        }
+    }
+
+    private void setScanner(String filename) {
+        File file = new File(filename).getAbsoluteFile();
+        try {
+            scanner = new Scanner(file);
+        } catch (FileNotFoundException ignored) {
+            scanner = null;
         }
     }
 

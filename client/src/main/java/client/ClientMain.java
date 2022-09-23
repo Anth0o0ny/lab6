@@ -1,6 +1,7 @@
 package client;
 
 import javax.xml.bind.JAXBException;
+import java.io.FileNotFoundException;
 import java.util.NoSuchElementException;
 
 public class ClientMain {
@@ -18,7 +19,9 @@ public class ClientMain {
             e.printStackTrace();
         }catch (NoSuchElementException ignore){
 
-        }finally {
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } finally {
             System.out.println("Клиент закончил работу.");
         }
 

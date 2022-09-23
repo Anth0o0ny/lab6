@@ -54,10 +54,8 @@ public class ServerInvoker {
                 return Optional.of(new RemoveById(serverReceiver));
             case CLEAR:
                 return Optional.of(new Clear(serverReceiver));
-//            case SAVE:
-//                return (new Save(receiver));
-//            case EXECUTE_SCRIPT:
-//                return (new ExecuteScript(receiver));
+            case EXECUTE_SCRIPT:
+                return Optional.of(new ExecuteScript(serverReceiver));
             case EXIT:
                 return Optional.of(new Exit(serverReceiver));
             case INSERT_AT:
@@ -72,7 +70,10 @@ public class ServerInvoker {
                 return Optional.of(new GroupCountingByTagline(serverReceiver));
             case PRINT_DESCENDING:
                 return Optional.of(new PrintDescending(serverReceiver));
+            case SAVE:
+            default:
+                Optional.empty();
         }
-        return null;
+        return Optional.empty();
     }
 }

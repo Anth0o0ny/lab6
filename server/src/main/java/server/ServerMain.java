@@ -26,6 +26,20 @@ public class ServerMain {
         Server server = new Server();
 
         while (true) {
+
+            if (System.in.available() > 0) {
+                String servcomment;
+                try {
+                    servcomment = (new Scanner(System.in)).nextLine();
+                } catch (NullPointerException e) {
+                    return;
+                }
+                if (servcomment.equals("save")) {
+                    System.out.println(serverReceiver.save());
+                }
+            }
+
+
             server.getSelector().select(3000);
             Set<SelectionKey> keys = server.getSelector().selectedKeys();
             Iterator iterator = keys.iterator();
@@ -33,6 +47,8 @@ public class ServerMain {
 
                 if (parseComment() == 0){
                     return;
+                }else{
+
                 }
 
 

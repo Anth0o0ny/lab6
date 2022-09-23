@@ -55,10 +55,9 @@ public class ClientInvoker {
                 return Optional.of(new RemoveById(clientReceiver));
             case CLEAR:
                 return Optional.of(new Clear(clientReceiver));
-//            case SAVE:
-//                return (new Save(receiver));
-//            case EXECUTE_SCRIPT:
-//                return (new ExecuteScript(receiver));
+
+            case EXECUTE_SCRIPT:
+                return Optional.of(new ExecuteScript(clientReceiver));
             case EXIT:
                 return Optional.of(new Exit(clientReceiver));
             case INSERT_AT:
@@ -73,7 +72,9 @@ public class ClientInvoker {
                 return Optional.of(new GroupCountingByTagline(clientReceiver));
             case PRINT_DESCENDING:
                 return Optional.of(new PrintDescending(clientReceiver));
+            case SAVE:
+            default:
+                return Optional.empty();
         }
-        return null;
     }
 }

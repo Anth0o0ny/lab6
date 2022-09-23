@@ -114,8 +114,7 @@ public class Client {
             return Optional.of((Response)input.readObject());
         }
         catch (IOException e) {
-//            System.out.println("Ошибка получения данных с сервера");
-            e.printStackTrace();
+            System.out.println("Ошибка получения данных с сервера");
             return Optional.empty();
         } catch (ClassNotFoundException e) {
             System.out.println("Некорреткные данные с сервера");

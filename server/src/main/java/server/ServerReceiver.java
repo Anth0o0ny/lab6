@@ -4,7 +4,7 @@ import baseclasses.Movie;
 import baseclasses.MoviesCollection;
 import commands.ServerCommand;
 import interaction.Response;
-import moviemaking.AddMovie;
+
 import moviemaking.IdGenerator;
 import parse.Parser;
 import sub.StringConstants;
@@ -28,40 +28,6 @@ public class ServerReceiver {
         idGenerator = new IdGenerator(collection);
         creationDate = new Date();
     }
-
-//    public String exit() {
-//        System.out.println(StringConstants.PatternCommands.RECEIVER_EXIT_RESULT);
-//        return null;
-//    }
-
-//    public String help(ServerInvoker invoker) {
-//
-//
-//        return "";
-//    }
-
-//    public String clear(Stack<Movie> collection) {
-//        collection.clear();
-//        return StringConstants.PatternCommands.RECEIVER_CLEAR_RESULT;
-//    }
-//
-//    public String show(Stack<Movie> collection) {
-//        if (collection.isEmpty()) {
-//            return StringConstants.PatternCommands.RECEIVER_EMPTY_COLLECTION_RESULT;
-//        } else {
-//            StringBuilder stringBuilder = new StringBuilder();
-//            for (Movie movie : collection) {
-//                stringBuilder.append(movie).append("; ");
-//            }
-//            return stringBuilder.toString();
-//        }
-//    }
-
-//    public String info(Stack<Movie> collection) {
-//        return StringConstants.PatternCommands.RECEIVER_INFO_TYPE_COLLECTION + collection.getClass() +
-//                StringConstants.PatternCommands.RECEIVER_INFO_AMOUNT + collection.size() +
-//                StringConstants.PatternCommands.RECEIVER_INFO_INITIALIZATION_DATE + creationDate;
-//    }
 
     public Response info(){
         String[] information = new String[3];
@@ -96,19 +62,7 @@ public class ServerReceiver {
             return new Response(stringBuilder.toString());
         }
     }
-    //    public String shuffle(Stack<Movie> collection) {
-//        if (collection.isEmpty()) {
-//            return StringConstants.PatternCommands.RECEIVER_EMPTY_COLLECTION_RESULT;
-//        } else {
-//            Collections.shuffle(collection);
-//            StringBuilder stringBuilder = new StringBuilder();
-//            for (Movie movie : collection) {
-//                stringBuilder.append(movie).append("; ");
-//            }
-//            return stringBuilder.toString();
-//        }
-//    }
-//
+
     public Response printDescending() {
         if (collection.isEmpty()) {
             return new Response(StringConstants.PatternCommands.RECEIVER_EMPTY_COLLECTION_RESULT);
@@ -141,12 +95,11 @@ public class ServerReceiver {
         }
     }
 
-    //
     public Response removeById(String argument) {
         String str = "";
-        long id;
+
         try {
-            id = Long.parseLong(argument);
+           long id = Long.parseLong(argument);
         } catch (NumberFormatException e){
             return new Response("Клиент передал невалидный id.");
         }
@@ -232,34 +185,6 @@ public class ServerReceiver {
         } return new Response(str);
     }
 
-    //
-//    public String addIfMin(Stack<Movie> collection) {
-//        return AddMovie.AddMovieIfMin(collection);
-//    }
-//
-//    public String update(Stack<Movie> collection, String argument){
-//        String str = "";
-//
-//        for (Movie movie : collection) {
-//
-//            if (String.valueOf(movie.getId()).equals(argument)) {
-//
-//                  long id = movie.getId();
-//                  Movie updateMovie = AddMovie.makeMovie();
-//                  updateMovie.setId(id);
-//                  collection.setElementAt(updateMovie, (collection.size() - collection.search(movie)));
-//
-//                  str = StringConstants.PatternCommands.RECEIVER_UPDATE_RESULT + id;
-//
-//                break;
-//
-//            } else {
-//
-//                str = StringConstants.PatternCommands.RECEIVER_UPDATE_WRONG_RESULT;
-//
-//            }
-//        } return str;
-//    }
     public Response insertAt(String argument, Movie movie){
 
         String str;
@@ -280,15 +205,10 @@ public class ServerReceiver {
         }
         return new Response(str);
     }
-//    public String save(MoviesCollection moviesCollection){
-//        Parser.parsingToXml(moviesCollection);
-//        return StringConstants.PatternCommands.RECEIVER_SAVE_RESULT;
-//    }
-//
-//    public String executeScript(ClientInvoker invoker, MoviesCollection moviesCollection, String argument) throws FileNotFoundException, FileNotFoundException {
-//        Terminal inp = new Terminal(invoker, moviesCollection);
-//        return inp.startFile(argument);
-//    }
+    public String save(){
+        Parser.parsingToXml(mc);
+        return StringConstants.PatternCommands.RECEIVER_SAVE_RESULT;
+    }
 }
 
 
