@@ -46,5 +46,14 @@ public class ClientReceiver {
 
     }
 
+    public Optional<Request> addIfMin() {
+        System.out.println("ClientReceiver addIfMin");
+        return Optional.of(new Request("add_if_min", AddMovie.makeMovie()));
+    }
+
+    public Optional<Request> update(String arg){
+        Long id = inputArgumentTester.assignInputId(arg);
+        return  Optional.of(new Request("update", arg, AddMovie.makeMovie()));
+    }
 
 }

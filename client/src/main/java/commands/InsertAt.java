@@ -6,18 +6,17 @@ import sub.StringConstants;
 
 import java.util.Optional;
 
-public class Add extends ClientCommand{
-
-    public Add(ClientReceiver clientReceiver) {
+public class InsertAt extends ClientCommand{
+    public InsertAt(ClientReceiver clientReceiver) {
         super(clientReceiver);
     }
 
     @Override
     public Optional<Request> execute(String arg) {
-        if (arg != null) {
-            System.out.println(StringConstants.Commands.CMD_WITHOUT_ARG);
+        if (arg == null) {
+            System.out.println(StringConstants.Commands.CMD_WITH_ARG);
             return Optional.empty();
         }
-        return clientReceiver.add();
+        return clientReceiver.insertAt(arg);
     }
 }

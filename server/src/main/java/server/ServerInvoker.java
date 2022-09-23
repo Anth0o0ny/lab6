@@ -48,8 +48,8 @@ public class ServerInvoker {
                 return Optional.of(new Show(serverReceiver));
             case ADD:
                 return Optional.of(new Add(serverReceiver));
-//            case UPDATE:
-//                return (new UpdateById(receiver));
+            case UPDATE:
+                return Optional.of(new Update(serverReceiver));
             case REMOVE_BY_ID:
                 return Optional.of(new RemoveById(serverReceiver));
             case CLEAR:
@@ -62,8 +62,8 @@ public class ServerInvoker {
                 return Optional.of(new Exit(serverReceiver));
             case INSERT_AT:
                 return Optional.of(new InsertAt(serverReceiver));
-//            case ADD_IF_MIN:
-//                return (new AddIfMin(receiver));
+            case ADD_IF_MIN:
+                return Optional.of(new AddIfMin(serverReceiver));
             case SHUFFLE:
                 return Optional.of(new Shuffle(serverReceiver));
             case REMOVE_ALL_BY_SCREENWRITER:

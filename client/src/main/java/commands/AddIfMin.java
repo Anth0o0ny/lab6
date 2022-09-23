@@ -6,9 +6,8 @@ import sub.StringConstants;
 
 import java.util.Optional;
 
-public class Add extends ClientCommand{
-
-    public Add(ClientReceiver clientReceiver) {
+public class AddIfMin extends ClientCommand{
+    public AddIfMin(ClientReceiver clientReceiver) {
         super(clientReceiver);
     }
 
@@ -18,6 +17,6 @@ public class Add extends ClientCommand{
             System.out.println(StringConstants.Commands.CMD_WITHOUT_ARG);
             return Optional.empty();
         }
-        return clientReceiver.add();
+        return clientReceiver.addIfMin();
     }
 }

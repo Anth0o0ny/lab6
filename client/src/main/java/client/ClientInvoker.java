@@ -49,8 +49,8 @@ public class ClientInvoker {
                 return Optional.of(new Show(clientReceiver));
             case ADD:
                 return Optional.of(new Add(clientReceiver));
-//            case UPDATE:
-//                return (new UpdateById(receiver));
+            case UPDATE:
+                return Optional.of(new Update(clientReceiver));
             case REMOVE_BY_ID:
                 return Optional.of(new RemoveById(clientReceiver));
             case CLEAR:
@@ -63,8 +63,8 @@ public class ClientInvoker {
                 return Optional.of(new Exit(clientReceiver));
             case INSERT_AT:
                 return Optional.of(new InsertAt(clientReceiver));
-//            case ADD_IF_MIN:
-//                return (new AddIfMin(receiver));
+            case ADD_IF_MIN:
+                return Optional.of(new AddIfMin(clientReceiver));
             case SHUFFLE:
                 return Optional.of(new Shuffle(clientReceiver));
             case REMOVE_ALL_BY_SCREENWRITER:

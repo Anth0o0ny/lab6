@@ -96,7 +96,7 @@ public class ServerReceiver {
             return new Response(stringBuilder.toString());
         }
     }
-//    public String shuffle(Stack<Movie> collection) {
+    //    public String shuffle(Stack<Movie> collection) {
 //        if (collection.isEmpty()) {
 //            return StringConstants.PatternCommands.RECEIVER_EMPTY_COLLECTION_RESULT;
 //        } else {
@@ -123,7 +123,7 @@ public class ServerReceiver {
             return new Response(stringBuilder.toString());
         }
     }
-//
+    //
     public Response groupCountingByTagline() {
         if (collection.isEmpty()) {
             return new Response(StringConstants.PatternCommands.RECEIVER_EMPTY_COLLECTION_RESULT);
@@ -139,9 +139,9 @@ public class ServerReceiver {
 
             return new Response(stringBuilder.toString());
         }
-        }
+    }
 
-//
+    //
     public Response removeById(String argument) {
         String str = "";
         long id;
@@ -166,7 +166,7 @@ public class ServerReceiver {
             return new Response(str);
         }
     }
-//
+    //
     public Response removeAllByScreenwriter(String arg) {
         boolean flag = false;
         if (collection.isEmpty()) {
@@ -188,7 +188,7 @@ public class ServerReceiver {
             }
         }
     }
-//
+    //
     public Response add(Movie movie) {
 
         long id = idGenerator.generateId();
@@ -197,8 +197,42 @@ public class ServerReceiver {
         return new Response("movie was add");
     }
 
+    public Response addIfMin(Movie movie){
+        if (movie.compareTo(Collections.min(collection)) < 0) {
+            long id = idGenerator.generateId();
+            movie.setId(id);
+            collection.push(movie);
+            return  new Response(StringConstants.MovieMaking.ADD_SUCCESS);
+        } else {
+            return new Response(StringConstants.MovieMaking.ADD_FAIL);
+        }
+    }
 
-//
+    public Response update(String arg, Movie movie){
+        String str = "";
+
+        for (Movie movie1 : collection) {
+
+            if (String.valueOf(movie1.getId()).equals(arg)) {
+
+                  long id = movie1.getId();
+
+                  movie.setId(id);
+                  collection.setElementAt(movie, (collection.size() - collection.search(movie1)));
+
+                  str = StringConstants.PatternCommands.RECEIVER_UPDATE_RESULT + id;
+
+                break;
+
+            } else {
+
+                str = StringConstants.PatternCommands.RECEIVER_UPDATE_WRONG_RESULT;
+
+            }
+        } return new Response(str);
+    }
+
+    //
 //    public String addIfMin(Stack<Movie> collection) {
 //        return AddMovie.AddMovieIfMin(collection);
 //    }
@@ -234,7 +268,8 @@ public class ServerReceiver {
             str = StringConstants.PatternCommands.RECEIVER_INSERT_AT_WRONG_RESULT;
         }else{
             if ((collection.size() - index > 0)){
-
+                long id = idGenerator.generateId();
+                movie.setId(id);
                 collection.insertElementAt(movie,index);
 
                 str = StringConstants.PatternCommands.RECEIVER_INSERT_AT_RESULT;
