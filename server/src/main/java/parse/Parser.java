@@ -46,12 +46,12 @@ public class Parser {
         } catch (JAXBException e) {
             System.out.println(StringConstants.StartTreatment.PARSE_FAILED);
             AddMovie.setIdGenerator(new IdGenerator(new MoviesCollection().getCollection()));
+
         }
     }
 
     public static void parsingToXml(MoviesCollection moviesCollection){
         try {
-
             JAXBContext context = JAXBContext.newInstance(MoviesCollection.class);
             Marshaller mar = context.createMarshaller();
             mar.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);

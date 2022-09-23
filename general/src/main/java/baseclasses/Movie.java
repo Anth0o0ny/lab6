@@ -3,12 +3,13 @@ package baseclasses;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
 
 @XmlRootElement(name = "movie")
 @XmlAccessorType(XmlAccessType.FIELD)
 
-public class Movie implements Comparable<Movie> {
+public class Movie implements Comparable<Movie>, Serializable {
     private long id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
@@ -23,6 +24,17 @@ public class Movie implements Comparable<Movie> {
     public Movie(long id, String name, Coordinates coordinates, java.util.Date creationDate, Long oscarsCount,
                  long budget, String tagline, MpaaRating mpaaRating, Person screenwriter) {
         setId(id);
+        setName(name);
+        setCoordinates(coordinates);
+        setCreationDate(creationDate);
+        setOscarsCount(oscarsCount);
+        setBudget(budget);
+        setTagline(tagline);
+        setMpaaRating(mpaaRating);
+        setScreenwriter(screenwriter);
+    }
+    public Movie(String name, Coordinates coordinates, java.util.Date creationDate, Long oscarsCount,
+                 long budget, String tagline, MpaaRating mpaaRating, Person screenwriter) {
         setName(name);
         setCoordinates(coordinates);
         setCreationDate(creationDate);

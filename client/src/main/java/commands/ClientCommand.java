@@ -6,7 +6,7 @@ import sub.AbstractCommand;
 
 public abstract class ClientCommand extends AbstractCommand<String, Request> {
 
-        private final ClientReceiver clientReceiver;
+        protected final ClientReceiver clientReceiver;
 
         public ClientCommand(ClientReceiver clientReceiver) {
                 this.clientReceiver = clientReceiver;

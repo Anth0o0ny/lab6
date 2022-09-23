@@ -55,6 +55,7 @@ public class Server {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
             objectOutputStream.writeObject(response);
+
             socketChannel.write(ByteBuffer.wrap((byteArrayOutputStream.toByteArray())));
         } catch (IOException e) {
             e.printStackTrace();

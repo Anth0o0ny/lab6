@@ -110,11 +110,12 @@ public class Client {
             inputStream.read(buffer.array());
             ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(buffer.array());
             ObjectInputStream input = new ObjectInputStream(byteArrayInputStream);
-//            Response response = (Response)input.readObject();
+
             return Optional.of((Response)input.readObject());
         }
         catch (IOException e) {
-            System.out.println("Ошибка получения данных с сервера");
+//            System.out.println("Ошибка получения данных с сервера");
+            e.printStackTrace();
             return Optional.empty();
         } catch (ClassNotFoundException e) {
             System.out.println("Некорреткные данные с сервера");

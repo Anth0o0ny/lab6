@@ -21,7 +21,7 @@ public class ClientMain {
         }finally {
             System.out.println("Клиент закончил работу.");
         }
-        //разобпаться с парсеров и еже с ним классами
+
 
     }
 }

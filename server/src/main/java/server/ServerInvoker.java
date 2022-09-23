@@ -27,12 +27,7 @@ public class ServerInvoker {
 
     public Optional<Response> execute(Request request) throws JAXBException {
         String commandName = request.getCommandName();
-//      УСЛОВИЕ О ТОМ, ЧТО КОННЕКТ НЕ ПРОШЕЛ
-//        if (this.commandsMap.containsKey(commandName))
-//            return this.commandsMap.get(commandName).execute(argument);
-        //System.out.println(RB.getString("badCommand"));
-        // return StringConstants.PatternCommands.INVOKER_WRONG_COMMAND;
-//        return Optional.empty();
+//
         System.out.println(this.commandsMap.get(commandName));
         return this.commandsMap.get(commandName).execute(request);
     }
@@ -51,12 +46,12 @@ public class ServerInvoker {
                 return Optional.of(new Info(serverReceiver));
             case SHOW:
                 return Optional.of(new Show(serverReceiver));
-//            case ADD:
-//                return (new Add(receiver));
+            case ADD:
+                return Optional.of(new Add(serverReceiver));
 //            case UPDATE:
 //                return (new UpdateById(receiver));
-//            case REMOVE_BY_ID:
-//                return (new RemoveById(receiver));
+            case REMOVE_BY_ID:
+                return Optional.of(new RemoveById(serverReceiver));
             case CLEAR:
                 return Optional.of(new Clear(serverReceiver));
 //            case SAVE:
@@ -65,14 +60,14 @@ public class ServerInvoker {
 //                return (new ExecuteScript(receiver));
             case EXIT:
                 return Optional.of(new Exit(serverReceiver));
-//            case INSERT_AT:
-//                return (new InsertAt(receiver));
+            case INSERT_AT:
+                return Optional.of(new InsertAt(serverReceiver));
 //            case ADD_IF_MIN:
 //                return (new AddIfMin(receiver));
             case SHUFFLE:
                 return Optional.of(new Shuffle(serverReceiver));
-//            case REMOVE_ALL_BY_SCREENWRITER:
-//                return (new RemoveAllByScreenwriter(receiver));
+            case REMOVE_ALL_BY_SCREENWRITER:
+                return Optional.of(new RemoveAllByScreenwriter(serverReceiver));
             case GROUP_COUNTING_BY_TAGLINE:
                 return Optional.of(new GroupCountingByTagline(serverReceiver));
             case PRINT_DESCENDING:

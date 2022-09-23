@@ -13,8 +13,6 @@ public class Request implements Serializable {
     private final String argument;
     private final Movie movie;
     private SocketAddress clientAddres = null;
-    private String login;
-    private String password;
 
     public Request(String commandName, String argument, Movie movie) {
         this.commandName = commandName;

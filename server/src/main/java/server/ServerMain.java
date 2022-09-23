@@ -1,10 +1,7 @@
 package server;
 
-import baseclasses.MoviesCollection;
 import interaction.Request;
 import interaction.Response;
-import parse.Parser;
-import sub.StringConstants;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;

@@ -8,7 +8,6 @@ import input.InputArgumentTester;
 
 public class CreatePerson {
     public static Person ctreatePerson() {
-
         InputArgumentTester iat = new InputArgumentTester();
 
         Color color = chooseColor();

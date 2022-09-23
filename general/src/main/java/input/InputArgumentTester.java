@@ -7,6 +7,7 @@ package input;
 import baseclasses.Color;
 import baseclasses.Country;
 import baseclasses.MpaaRating;
+import sub.StringConstants;
 
 
 import java.util.Scanner;
@@ -15,17 +16,30 @@ public class InputArgumentTester {
 
     Scanner sc = new Scanner(System.in);
 
+    public  Long assignInputId(String arg) {
+        long id;
+
+        try {
+            id = Long.parseLong(arg);
+            if (id <= 0)
+                throw new NumberFormatException();
+        } catch (NumberFormatException e) {
+            return null;
+        }
+        return id;
+    }
+
     public String assignInputName() {
         String name;
         do {
-           // System.out.println(StringConstants.MovieMaking.ENTER_MOVIE_NAME);
+            System.out.println(StringConstants.MovieMaking.ENTER_MOVIE_NAME);
             try {
                 name = sc.nextLine();
                 if (name.isEmpty()) {
                     throw new RuntimeException();
                 }
             } catch (RuntimeException ex) {
-               // System.out.println(StringConstants.MovieMaking.WRONG_NAME);
+                System.out.println(StringConstants.MovieMaking.WRONG_NAME);
                 name = null;
             }
         } while (name == null);
@@ -35,7 +49,7 @@ public class InputArgumentTester {
     public Double assignInputX() {
         Double x;
         do {
-            //System.out.println( StringConstants.MovieMaking.ENTER_COORDINATE + " x: ");
+            System.out.println( StringConstants.MovieMaking.ENTER_COORDINATE + " x: ");
             String inp = sc.nextLine();
             try {
                 x = Double.parseDouble(inp);
@@ -43,7 +57,7 @@ public class InputArgumentTester {
                     throw new NumberFormatException();
                 }
             } catch (NumberFormatException ex) {
-                //System.out.println(StringConstants.MovieMaking.WRONG_X_COORDINATE);
+                System.out.println(StringConstants.MovieMaking.WRONG_X_COORDINATE);
                 x = null;
             }
         } while (x == null);
@@ -53,12 +67,12 @@ public class InputArgumentTester {
     public Float assignInputY() {
         Float y;
         do {
-            //System.out.println( StringConstants.MovieMaking.ENTER_COORDINATE + " y: ");
+            System.out.println( StringConstants.MovieMaking.ENTER_COORDINATE + " y: ");
             String inp = sc.nextLine();
             try {
                 y = Float.parseFloat(inp);
             } catch (NumberFormatException ex) {
-               // System.out.println(StringConstants.MovieMaking.WRONG_Y_COORDINATE);
+                System.out.println(StringConstants.MovieMaking.WRONG_Y_COORDINATE);
                 y = null;
             }
         } while (y == null);
@@ -68,7 +82,7 @@ public class InputArgumentTester {
     public Long assignInputOscarCount() {
         Long oscCount;
         do {
-            //System.out.println(StringConstants.MovieMaking.ENTER_OSCAR_COUNT);
+            System.out.println(StringConstants.MovieMaking.ENTER_OSCAR_COUNT);
             String inp = sc.nextLine();
             try {
                 oscCount = Long.parseLong(inp);
@@ -76,7 +90,7 @@ public class InputArgumentTester {
                     throw new NumberFormatException();
                 }
             } catch (NumberFormatException ex) {
-                //System.out.println(StringConstants.MovieMaking.WRONG_OSCAR_COUNT);
+                System.out.println(StringConstants.MovieMaking.WRONG_OSCAR_COUNT);
                 oscCount = null;
             }
         } while (oscCount == null);
@@ -86,7 +100,7 @@ public class InputArgumentTester {
     public long assignInputBudget() {
         long budget;
         do {
-            //System.out.println(StringConstants.MovieMaking.ENTER_BUDGET);
+            System.out.println(StringConstants.MovieMaking.ENTER_BUDGET);
             String inp = sc.nextLine();
             try {
                 budget = Long.parseLong(inp);
@@ -94,7 +108,7 @@ public class InputArgumentTester {
                     throw new NumberFormatException();
                 }
             } catch (NumberFormatException ex) {
-                //System.out.println(StringConstants.MovieMaking.WRONG_BUDGET);
+                System.out.println(StringConstants.MovieMaking.WRONG_BUDGET);
                 budget = 0;
             }
         } while (budget == 0);
@@ -104,14 +118,14 @@ public class InputArgumentTester {
     public String assignTagline() {
         String tagline;
         do {
-            //System.out.println(StringConstants.MovieMaking.ENTER_TAGLINE);
+            System.out.println(StringConstants.MovieMaking.ENTER_TAGLINE);
             try {
                 tagline = sc.nextLine();
                 if (tagline.length() > 158) {
                     throw new RuntimeException();
                 }
             } catch (RuntimeException ex) {
-                //System.out.println(StringConstants.MovieMaking.WRONG_TAGLINE);
+                System.out.println(StringConstants.MovieMaking.WRONG_TAGLINE);
                 tagline = null;
             }
         } while (tagline == null);
@@ -124,7 +138,7 @@ public class InputArgumentTester {
         byte rateNum;
         MpaaRating res = null;
         do {
-            //System.out.println(StringConstants.MovieMaking.ENTER_MPAA_RATING);
+            System.out.println(StringConstants.MovieMaking.ENTER_MPAA_RATING);
             for (byte i = 0; MpaaRating.values().length > i; i++) {
                 System.out.println((i + 1) + ". " + MpaaRating.values()[i]);
             }
@@ -134,7 +148,7 @@ public class InputArgumentTester {
                 rateNum = Byte.parseByte(inp);
                 res = MpaaRating.values()[rateNum - 1];
             } catch (ArrayIndexOutOfBoundsException | NumberFormatException ex) {
-               // System.out.println(StringConstants.MovieMaking.WRONG_MPAA_RATING);
+                System.out.println(StringConstants.MovieMaking.WRONG_MPAA_RATING);
                 rateNum = 0;
             }
         }
@@ -146,14 +160,14 @@ public class InputArgumentTester {
     public String assignInputPersonName(){
         String name;
         do {
-           // System.out.println(StringConstants.MovieMaking.ENTER_PERSON_NAME);
+            System.out.println(StringConstants.MovieMaking.ENTER_PERSON_NAME);
             try {
                 name = sc.nextLine();
                 if (name.isEmpty()) {
                     throw new RuntimeException();
                 }
             } catch (RuntimeException ex) {
-                //System.out.println(StringConstants.MovieMaking.WRONG_PERSON_NAME);
+                System.out.println(StringConstants.MovieMaking.WRONG_PERSON_NAME);
                 name = null;
             }
         } while (name == null);
@@ -163,7 +177,7 @@ public class InputArgumentTester {
     public float assignInputHeight(){
         float height;
         do {
-            //System.out.println(StringConstants.MovieMaking.ENTER_HEIGHT);
+            System.out.println(StringConstants.MovieMaking.ENTER_HEIGHT);
             String inp = sc.nextLine();
             try {
                 height = Float.parseFloat(inp);
@@ -171,7 +185,7 @@ public class InputArgumentTester {
                     throw new NumberFormatException();
                 }
             } catch (NumberFormatException ex) {
-                //System.out.println(StringConstants.MovieMaking.WRONG_HEIGHT);
+                System.out.println(StringConstants.MovieMaking.WRONG_HEIGHT);
                 height = 0;
             }
         } while (height == 0);
@@ -182,7 +196,7 @@ public class InputArgumentTester {
         byte countryNum;
         Country res = null;
         do {
-            //System.out.println(StringConstants.MovieMaking.ENTER_COUNTRY);
+            System.out.println(StringConstants.MovieMaking.ENTER_COUNTRY);
             for (byte i = 0; Country.values().length > i; i++) {
                 System.out.println((i + 1) + ". " + Country.values()[i]);
             }
@@ -191,7 +205,7 @@ public class InputArgumentTester {
                 countryNum = Byte.parseByte(inp);
                 res = Country.values()[countryNum - 1];
             } catch (ArrayIndexOutOfBoundsException | NumberFormatException ex) {
-               // System.out.println(StringConstants.MovieMaking.WRONG_COUNTRY);
+                System.out.println(StringConstants.MovieMaking.WRONG_COUNTRY);
                 countryNum = 0;
             }
         }
@@ -207,7 +221,7 @@ public class InputArgumentTester {
         Color res = null;
 
         do {
-            //System.out.println(StringConstants.MovieMaking.ENTER_COLOR);
+            System.out.println(StringConstants.MovieMaking.ENTER_COLOR);
             for (byte i = 0; Color.values().length > i; i++) {
                 System.out.println((i + 1) + ". " + Color.values()[i]);
             }
@@ -216,7 +230,7 @@ public class InputArgumentTester {
                 colorNum = Byte.parseByte(inp);
                 res = Color.values()[colorNum - 1];
             } catch (ArrayIndexOutOfBoundsException | NumberFormatException ex) {
-                //System.out.println(StringConstants.MovieMaking.WRONG_COLOR);
+                System.out.println(StringConstants.MovieMaking.WRONG_COLOR);
                 colorNum = 0;
             }
         } while (colorNum == 0);

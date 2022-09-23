@@ -4,8 +4,9 @@ package baseclasses;
 
 
 import javax.xml.bind.annotation.XmlElement;
+import java.io.Serializable;
 
-public class Person {
+public class Person implements Serializable {
 
     private String name; //Поле не может быть null, Строка не может быть пустой
     private float height; //Значение поля должно быть больше 0

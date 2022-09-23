@@ -15,9 +15,6 @@ public class AddMovie {
 
     private static IdGenerator idGenerator;
 
-    public AddMovie(InputArgumentTester inputArgumentTester) {
-    }
-
     public static void setIdGenerator(IdGenerator idGenerator){
         AddMovie.idGenerator = idGenerator;
     }
@@ -42,8 +39,8 @@ public class AddMovie {
 
         InputArgumentTester iat = new InputArgumentTester();
 
+//        long id = idGenerator.generateId();
 
-        long id = idGenerator.generateId();
         String name = iat.assignInputName() ;
         Double x = iat.assignInputX();
         Float y = iat.assignInputY();
@@ -55,6 +52,6 @@ public class AddMovie {
         MpaaRating rate = CreatePerson.chooseRating();
         Person person = CreatePerson.ctreatePerson();
 
-        return new Movie(id, name, coordinates, date, oscCount, budget, tagline, rate, person);
+        return new Movie( name, coordinates, date, oscCount, budget, tagline, rate, person);
     }
 }
