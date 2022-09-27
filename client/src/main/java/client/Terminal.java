@@ -1,6 +1,5 @@
 package client;
 
-import baseclasses.MoviesCollection;
 import commands.ExecuteScript;
 import interaction.Request;
 import interaction.Response;
@@ -9,7 +8,6 @@ import sub.StringConstants;
 import javax.xml.bind.JAXBException;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Scanner;
@@ -21,7 +19,6 @@ public class Terminal {
     private final ClientInvoker clientInvoker;
     private final Client client;
 
-    private String output;
 
     public Terminal(ClientInvoker clientInvoker, Client client) {
         this.clientInvoker = clientInvoker;
@@ -48,7 +45,7 @@ public class Terminal {
                 client.sendRequest(request);
                 Optional<Response> optionalResponse = client.getResponse();
                 if (!optionalResponse.isPresent()) {
-                    System.out.println("Execute is broken");
+                    System.out.println(StringConstants.StartTreatment.EXECUTE_FAILED);
                 } else{
                     Response response = optionalResponse.get();
                     responseProcessing(response);
@@ -90,6 +87,7 @@ public class Terminal {
                 }
             } else {
                 client.reconnect();
+                inputKeyboard();
             }
         }
     }

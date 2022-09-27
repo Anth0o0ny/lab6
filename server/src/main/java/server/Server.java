@@ -2,6 +2,7 @@ package server;
 
 import interaction.Request;
 import interaction.Response;
+import sub.StringConstants;
 
 import java.io.*;
 import java.net.InetSocketAddress;
@@ -42,10 +43,10 @@ public class Server {
             SocketChannel client = serverSocketChannel.accept();
             client.configureBlocking(false);
             client.register(selector, SelectionKey.OP_READ);
-            System.out.print("Канал зарегистрирован ");
+            System.out.print(StringConstants.Server.CHANNEL_REGISTERED);
         }
         catch (IOException e) {
-            System.out.println("Ошибка в регистрации канала");
+            System.out.println(StringConstants.Server.CHANNEL_REGISTER_CANCELED);
         }
     }
 
@@ -76,7 +77,7 @@ public class Server {
             key.cancel();
         }
         catch (ClassNotFoundException e) {
-            System.out.println("Ошибка получения запроса от клиента");
+            System.out.println(StringConstants.Server.READ_REQUEST_FAILED);
         }
         return request;
     }

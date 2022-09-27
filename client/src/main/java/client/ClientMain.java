@@ -1,5 +1,7 @@
 package client;
 
+import sub.StringConstants;
+
 import javax.xml.bind.JAXBException;
 import java.io.FileNotFoundException;
 import java.util.NoSuchElementException;
@@ -19,11 +21,11 @@ public class ClientMain {
         try {
             terminal.inputKeyboard();
         } catch (JAXBException e) {
-            System.out.println("Проблема парсинга");;
+            System.out.println(StringConstants.StartTreatment.PARSE_FAILED);;
         }catch (NoSuchElementException ignore){
 
         } finally {
-            System.out.println("Клиент закончил работу.");
+            System.out.println(StringConstants.Client.CLIENT_END_WORK);
         }
 
 

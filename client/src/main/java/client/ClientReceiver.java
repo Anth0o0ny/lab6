@@ -20,7 +20,6 @@ public class ClientReceiver {
     public Optional<Request> removeById(String arg) {
         Long id = inputArgumentTester.assignInputId(arg);
         if (id == null) {
-            System.out.println("Illegal id");
             return Optional.empty();
         }
         return Optional.of(new Request("remove_by_id", arg));
@@ -35,7 +34,6 @@ public class ClientReceiver {
         if (position > 0){
             return Optional.of(new Request("insert_at", arg, AddMovie.makeMovie()));
         } else {
-            System.out.println("Illegal id");
             return Optional.empty();
         }
     }

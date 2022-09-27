@@ -2,6 +2,7 @@ package server;
 
 import interaction.Request;
 import interaction.Response;
+import sub.StringConstants;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
@@ -35,10 +36,10 @@ public class ServerMain {
                     System.out.println(serverReceiver.save());
                 }
                 else if (servcomment.equals("exit")) {
-                    System.out.println("Сервер завершает свою работу.");
+                    System.out.println(StringConstants.Server.EXIT_RESULT);
                     System.exit(0);
                 } else {
-                    System.out.println("Сервер поддерживает только две команды: save и exit.");
+                    System.out.println(StringConstants.Server.WRONG_COMMAND);
                 }
 
 

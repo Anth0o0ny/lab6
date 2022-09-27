@@ -2,7 +2,9 @@ package client;
 
 import interaction.Request;
 import interaction.Response;
+import sub.StringConstants;
 
+import javax.xml.bind.JAXBException;
 import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
@@ -42,31 +44,32 @@ public class Client {
             inputStream = socket.getInputStream();
             this.outputStream = socket.getOutputStream();
 
-            System.out.println("Успешно подключились к серверу");
+            System.out.println(StringConstants.Client.CONNECT_SUCCESS);
             return true;
         } catch (IOException e) {
-            System.out.println("Ошибка создания сокета. Сервер не может начать работу");
+            System.out.println(StringConstants.Client.CONNECT_FAILED);
             return false;
         }
 
     }
 
-    public boolean reconnect() {
+    public boolean reconnect(){
         int number = 1;
 
         while (!connect()) {
-            System.out.println("Переподключение к серверу...");
-            System.out.println("Попытка № " + number);
+            System.out.println(StringConstants.Client.RECONNECT);
+            System.out.println(StringConstants.Client.RECONNECT_TRYNUMBER + number);
             if (number % 3 == 0) {
-                System.out.println("Продолжить подключение? Введите 'Да' или 'Нет' с заглавной буквы");
+                System.out.println(StringConstants.Client.RECONNECT_AGAIN);
                 Scanner input = new Scanner(System.in);
                 String choose = input.nextLine();
-                if (choose.equals("Нет")) {
+                if (choose.equals("No")) {
                     return false;
                 }
             }
             number++;
         }
+
         return true;
     }
 
@@ -83,10 +86,10 @@ public class Client {
             byte[] sendArray = byteArrayOutputStream.toByteArray();
             socket.getOutputStream().write(sendArray);
         } catch (SocketException e){
-            System.out.println("Сервер недоступен");
+            System.out.println(StringConstants.Client.SEND_REQUEST_CANT_CONNECT);
             reconnect();
         } catch (IOException e) {
-            System.out.println("Невозможно создать запрос");;
+            System.out.println(StringConstants.Client.SEND_REQUEST_FAILED);;
         }
     }
 
@@ -101,10 +104,10 @@ public class Client {
             return Optional.of((Response)input.readObject());
         }
         catch (IOException e) {
-            System.out.println("Ошибка получения данных с сервера");
+            System.out.println(StringConstants.Client.GET_RESPONSE_FAILED);
             return Optional.empty();
         } catch (ClassNotFoundException e) {
-            System.out.println("Некорреткные данные с сервера");
+            System.out.println(StringConstants.Client.GET_RESPONSE_WRONG_INFO);
             return Optional.empty();
         } catch (NullPointerException e){
              return Optional.empty();
